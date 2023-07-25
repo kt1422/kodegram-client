@@ -1,0 +1,244 @@
+* {
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+}
+
+
+/* sidenav default css */
+.sidenav {
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    border-right: 1px solid #ddd;
+}
+.sidenav .sidenav-header {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #ddd;
+}
+.sidenav .sidenav-header .logo {
+    height: 40px;
+}
+.sidenav .nav-item {
+    display: flex;
+    align-items: center;
+}
+.sidenav .nav-item a, .sidenav .nav-item button {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    text-decoration: none;
+}
+.sidenav .nav-item .nav-link:hover {
+    color: blue;
+}
+.sidenav .nav-item .nav-icon {
+    font-size: 21px;
+    margin-right: 10px;
+}
+.sidenav .nav-item .nav-label {
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* adjust sidenav for large screen */
+@media only screen and (min-width: 779px) {
+    /* classes for sidenav */
+    .sidenav .sidenav-header {
+        padding: 10px 10px 10px 10px;
+    }
+    .sidenav .logo {
+        height: 5px;
+        margin-left: 12px;
+        margin-right: 0px;
+        padding-left: 0px;
+    }
+    .sidenav .nav-item {
+        padding: 10px;
+    }
+    .sidenav .nav-item a, .sidenav .nav-item button {
+        padding: 8px 16px;
+    }
+    
+    /* for other ui */
+    .home {
+        margin-left: 250px;
+    }
+    .chat {
+        width: 85px;
+        height: 100vh;
+        top: 0;
+        bottom: auto;
+    }
+    .chat .nav-item a .nav-label, .chat .nav-item button .nav-label {
+        display: none;
+    }
+    .chat .sidenav-header a .con2 .kode {
+        display: none;
+    }
+    .chat-body {
+        margin-left: 85px;
+    }
+    .msg-page {
+        width: calc(100vw - 85px) !important;
+    }
+    .profile-page {
+        width: calc(100vw - 250px) !important;
+    }
+}
+
+/* adjust sidenav, remove sidenav icons for small and medium screen */
+@media only screen and (max-width: 779px) {
+    .sidenav .nav-item a .nav-label, .sidenav .nav-item button .nav-label {
+        display: none;
+    }
+    .kode {
+        display: none;
+    }
+}
+
+/* adjust sidenav for medium screen */
+@media only screen and (min-width: 480px) and (max-width: 779px) {
+    /* classes for sidenav */
+    .sidenav {
+        width: 85px;
+        height: 100vh;
+        top: 0;
+        bottom: auto;
+    }
+    .sidenav .logo {
+        height: 5px;
+        margin-left: 12px;
+        margin-right: 0px;
+        padding-left: 0px;
+    }
+    .sidenav .nav-item .nav-icon {
+        font-size: 16px;
+    }
+    .sidenav .nav-item {
+        padding: 10px;
+    }
+    .sidenav .pfp{
+        padding: 5px;
+    }
+    .sidenav .nav-item a, .sidenav .nav-item button {
+        padding: 8px 16px;
+    }
+    .sidenav .sidenav-header {
+        padding: 10px 10px 10px 10px;
+    }
+
+    /* for other ui */
+    .home, .chat-body {
+        margin-left: 85px;
+    }
+    .msg-page {
+        width: calc(100vw - 85px) !important;
+    }
+    .profile-page {
+        width: calc(100vw - 85px) !important;
+    }
+}
+
+
+/* classes for small screen */
+@media only screen and (max-width: 480px) {
+    /* adjust sidenav for small screen */
+    .sidenav {
+        width: 100vw;
+        height: 7vh;
+        bottom: 0;
+        top: auto;
+        border-top: 1px solid #ddd;
+        border-right: none;
+    }
+    .sidenav .sidenav-header {
+        border-bottom: none;
+        display: none;
+    }
+    .sidenav .nav-list {
+        display: flex !important;
+        flex-wrap: nowrap;
+        align-content: center;
+        justify-content: center;
+        align-items: center;
+    }
+    .sidenav ol, .sidenav ul {
+        padding-left: 0;
+    }
+    .sidenav .nav-item {
+        padding: 10px;
+    }
+    .sidenav .nav-list .hide-icon {
+        display: none;
+    }
+
+    /* other classes for small screen */
+    .home {
+        margin-left: 0px;
+        padding-bottom: 7vh;
+    }
+    .chat-body {
+        margin-left: 0px;
+    }
+    .msg-page {
+        width: 100vw !important;
+    }
+    .profile-page {
+        width: 100vw !important;
+    }
+}
+
+/* adjust sidenav items for different small screens */
+@media only screen and (min-width: 400px) and (max-width: 480px) {
+    .sidenav .nav-item .nav-icon {
+        font-size: 16px;
+        margin-right: 5px;
+    }
+    .sidenav .nav-item a, .sidenav .nav-item button {
+        padding: 0px 16px;
+    }
+}
+@media only screen and (min-width: 360px) and (max-width: 400px) {
+    .sidenav .nav-item .nav-icon {
+        font-size: 16px;
+        margin-right: 0px;
+    }
+    .sidenav .nav-item a, .sidenav .nav-item button {
+        padding: 0px 16px;
+    }
+}
+@media only screen and (min-width: 330px) and (max-width: 360px) {
+    .sidenav .nav-item .nav-icon {
+        font-size: 16px;
+        margin-right: 0px;
+    }
+    .sidenav .nav-item a, .sidenav .nav-item button {
+        padding: 0px 13px;
+    }
+}
+@media only screen and (min-width: 300px) and (max-width: 330px) {
+    .sidenav .nav-item .nav-icon {
+        font-size: 16px;
+        margin-right: 0px;
+    }
+    .sidenav .nav-item a, .sidenav .nav-item button {
+        padding: 0px 10px;
+    }
+}
+@media only screen and (max-width: 300px) {
+    .sidenav .nav-item .nav-icon {
+        font-size: 16px;
+        margin-right: 0px;
+    }
+    .sidenav .nav-item a, .sidenav .nav-item button {
+        padding: 0px 7px;
+    }
+}

@@ -1,0 +1,441 @@
+@font-face {
+    font-family: 'Billabong';
+    src: url('../font/FontsFree-Net-Billabong.ttf') format('truetype');
+}
+
+.billabong{
+    font-family: 'Billabong';
+    color: #0093E9;
+}
+
+.title {
+    font-size: 55px;
+}
+
+.start-logo {
+    width: 400px;
+}
+
+.login {
+    width: 350px;
+}
+
+.post-card{
+    height: 500px;
+}
+
+.post-icon{
+    padding: 0 4px 0 4px;
+}
+
+.comment-box:focus {
+    outline: none;
+}
+
+
+/* dropdowns and links hovers */
+.nav-menu {
+    color: black;
+}
+.nav-menu:hover {
+    color: white;
+    background: linear-gradient(to top, rgb(9, 32, 63) 0%, rgb(83, 120, 149) 100%);
+}
+.name-link:hover {
+    color: gray;
+}
+.black-link {
+    color: gray;
+}
+.black-link:hover {
+    color: black;
+}
+.black-icon {
+    color: white;
+}
+.black-icon:hover {
+    color: gray;
+}
+.white-link {
+    color: gray;
+}
+.white-link:hover {
+    color: white;
+}
+.follow-count:hover {
+    text-shadow: 2px 2px 5px red;
+}
+
+
+/* themes and icon colors */
+.light {
+    background-color: #fff;
+    color: black;
+    transition: all 0.5s ease-in-out;
+}
+.dark {
+    background-color: #292b2f;
+    color: #fff;
+    transition: all 0.5s ease-in-out;
+}
+.darker {
+    background-color: #292b2f;
+    color: #fff;
+    transition: background-color 0.5s ease-in-out;
+}
+.lighter {
+    background-color: #fff;
+    color: black;
+    transition: background-color 0.5s ease-in-out;
+}
+.red {
+    color: #DC3545;
+    transition: all 0.5s ease-in-out;
+}
+
+
+/* custom scroll bars */
+.style-4::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: none;
+}
+.style-4::-webkit-scrollbar
+{
+	width: 0px;
+}
+.style-4::-webkit-scrollbar-thumb {
+    background: white;
+    -webkit-box-shadow: none;
+}
+.style-4::-webkit-scrollbar-thumb:window-inactive {
+    background: none;
+}
+.style-5::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: transparent;
+}
+.style-5::-webkit-scrollbar
+{
+	width: 4px;
+	background-color: transparent;
+}
+.style-5::-webkit-scrollbar-thumb
+{
+	background-color: gray;
+}
+
+
+/* chat ui */
+.convo:hover {
+    background-color:rgba(0,0,0,0.1);
+}
+.dark-selected {
+    background-color:darkslategray;
+}
+.light-selected {
+    background-color: rgb(167, 158, 149)
+}
+.lastChat {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.convo-con {
+    width: 375px;
+}
+.msg-body {
+    width: calc(100vw - 460px);
+}
+.convo-head {
+    width: 80px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.convo-head img {
+    width: 60px;
+    height: 60px;
+}
+.convo-body {
+    width: 295px;
+}
+.chat-page {
+    height: 100vh;
+}
+.post-header {
+    border-bottom: 1px solid #ddd;
+    padding: 12px 0 12px 0;
+}
+
+
+/* adjust width of post-card on home page */
+@media only screen and (min-width: 900px) {
+    .media {
+        width: 600px;
+    }
+}
+@media only screen and (min-width: 625px) and (max-width: 900px) {
+    .media {
+        width: 500px;
+    }
+}
+@media only screen and (min-width: 530px) and (max-width: 625px) {
+    .media {
+        width: 400px;
+    }
+    .post-card {
+        height: 400px;
+    }
+}
+@media only screen and (min-width: 480px) and (max-width: 530px) {
+    .media {
+        width: 350px;
+    }
+    .post-card {
+        height: 350px;
+    }
+}
+@media only screen and (max-width: 480px) {
+    .media {
+        width: 100vw;
+    }
+    .post-card {
+        height: 100vw;
+    }
+    .post-icon {
+        padding: 0 20px 0 16px;
+    }
+}
+@media only screen and (min-width: 992px) {
+    .post-modal {
+        height: 90vh;
+    }
+}
+
+
+/* adjust width of thumbnail&post on profile page */
+@media only screen and (min-width: 1200px) {
+    .thumbnail {
+        width: 300px;
+        height: 300px;
+    }
+}
+@media only screen and (min-width: 1150px) and (max-width: 1200px) {
+    .thumbnail {
+        width: 275px;
+        height: 275px;
+    }
+}
+@media only screen and (min-width: 1050px) and (max-width: 1150px) {
+    .thumbnail {
+        width: 250px;
+        height: 250px;
+    }
+}
+@media only screen and (min-width: 950px) and (max-width: 1050px) {
+    .thumbnail {
+        width: 225px;
+        height: 225px;
+    }
+}
+@media only screen and (min-width: 875px) and (max-width: 950px) {
+    .thumbnail {
+        width: 200px;
+        height: 200px;
+    }
+}
+@media only screen and (min-width: 800px) and (max-width: 875px) {
+    .thumbnail {
+        width: 175px;
+        height: 175px;
+    }
+}
+@media only screen and (min-width: 779px) and (max-width: 800px) {
+    .thumbnail {
+        width: 160px;
+        height: 160px;
+    }
+}
+@media only screen and (min-width: 710px) and (max-width: 779px) {
+    .thumbnail {
+        width: 200px;
+        height: 200px;
+    }
+}
+@media only screen and (min-width: 630px) and (max-width: 710px) {
+    .thumbnail {
+        width: 175px;
+        height: 175px;
+    }
+}
+@media only screen and (min-width: 550px) and (max-width: 630px) {
+    .thumbnail {
+        width: 150px;
+        height: 150px;
+    }
+}
+@media only screen and (min-width: 480px) and (max-width: 550px) {
+    .thumbnail {
+        width: 125px;
+        height: 125px;
+    }
+}
+@media only screen and (min-width: 470px) and (max-width: 480px) {
+    .thumbnail {
+        width: 150px;
+        height: 150px;
+    }
+}
+@media only screen and (min-width: 440px) and (max-width: 470px) {
+    .thumbnail {
+        width: 140px;
+        height: 140px;
+    }
+}
+@media only screen and (min-width: 410px) and (max-width: 440px) {
+    .thumbnail {
+        width: 130px;
+        height: 130px;
+    }
+}
+@media only screen and (min-width: 380px) and (max-width: 410px) {
+    .thumbnail {
+        width: 120px;
+        height: 120px;
+    }
+}
+@media only screen and (min-width: 350px) and (max-width: 380px) {
+    .thumbnail {
+        width: 110px;
+        height: 110px;
+    }
+}
+@media only screen and (min-width: 320px) and (max-width: 350px) {
+    .thumbnail {
+        width: 100px;
+        height: 100px;
+    }
+}
+@media only screen and (min-width: 300px) and (max-width: 320px) {
+    .thumbnail {
+        width: 90px;
+        height: 90px;
+    }
+}
+
+
+/* adjust contacts width on chat page */
+@media only screen and (min-width: 779px) and (max-width: 1000px) {
+    .convo-con {
+        width: 300px !important;
+    }
+    .convo-body {
+        width: 225px !important;
+    }
+    .msg-body {
+        width: calc(100vw - 385px) !important;
+    }
+}
+@media only screen and (min-width: 680px) and (max-width: 779px) {
+    .convo-con {
+        width: 246px !important;
+    }
+    .convo-head {
+        width: 65px !important;
+        padding-left: 10px !important;
+        padding-right: 5px !important;
+    }
+    .convo-head img {
+        width: 50px !important;
+        height: 50px !important;
+    }
+    .convo-body {
+        width: 180px !important;
+    }
+    .msg-body {
+        width: calc(100vw - 331px) !important;
+    }
+}
+@media only screen and (min-width: 480px) and (max-width: 680px) {
+    .convo-con {
+        width: calc(100vw - 85px) !important;
+    }
+    .convo-body {
+        width: calc(100% - 80px) !important;
+    }
+    .msg-body {
+        width: calc(100vw - 85px) !important;
+    }
+}
+@media only screen and (max-width: 480px) {
+    .convo-con {
+        width: 100vw !important;
+    }
+    .convo-body {
+        width: calc(100% - 80px) !important;
+    }
+    .msg-body {
+        width: 100vw !important;
+    }
+}
+
+
+/* adjust message width on chat page */
+@media only screen and (min-width: 1300px) {
+    .chat-width {
+        max-width: 600px;
+    }
+}
+@media only screen and (min-width: 1100px) and (max-width: 1300px) {
+    .chat-width {
+        max-width: 500px;
+    }
+}
+@media only screen and (min-width: 900px) and (max-width: 1100px) {
+    .chat-width {
+        max-width: 400px;
+    }
+}
+@media only screen and (min-width: 750px) and (max-width: 900px) {
+    .chat-width {
+        max-width: 300px;
+    }
+}
+@media only screen and (min-width: 680px) and (max-width: 750px) {
+    .chat-width {
+        max-width: 250px;
+    }
+}
+@media only screen and (min-width: 600px) and (max-width: 680px) {
+    .chat-width {
+        max-width: 400px;
+    }
+}
+@media only screen and (min-width: 500px) and (max-width: 600px) {
+    .chat-width {
+        max-width: 300px;
+    }
+}
+@media only screen and (min-width: 350px) and (max-width: 500px) {
+    .chat-width {
+        max-width: 250px;
+    }
+}
+@media only screen and (min-width: 300px) and (max-width: 350px) {
+    .chat-width {
+        max-width: 200px;
+    }
+}
+@media only screen and (min-width: 250px) and (max-width: 300px) {
+    .chat-width {
+        max-width: 150px;
+    }
+}
+
+
+/* bottom nav, adjust upper container for chat */
+@media only screen and (max-width: 480px) {
+    .chat-page {
+        height: 93vh;
+    }
+}
