@@ -8,7 +8,6 @@ import Profile from '../components/pages/Profile';
 import Aboutus from '../components/pages/Aboutus';
 import Settings from '../components/pages/Settings';
 import Chat from '../components/pages/Chat';
-import Startchat from '../components/partials/StartChat';
 
 const Router = () => {
     const cookies = new Cookies();
@@ -17,7 +16,7 @@ const Router = () => {
 
     return (
         <Routes>
-            <Route index element={<Navigate to='/user/login'/>} />
+            <Route index element={<Navigate to='/home'/>} />
             <Route path='/home' element={<Home theme={theme} setTheme={setTheme}/>} />
             <Route path='/user/login' element={<Login theme={theme} setTheme={setTheme} />} />
             <Route path='/user/register' element={<Register />} />
@@ -25,7 +24,6 @@ const Router = () => {
             <Route path='/user/chat' element={<Chat theme={theme} setTheme={setTheme}/>} />
             <Route path='/user/aboutus' element={<Aboutus theme={theme} setTheme={setTheme}/>} />
             <Route path='/user/settings' element={<Settings theme={theme} setTheme={setTheme}/>} />
-            <Route path='/user/test' element={<Startchat theme={theme} setTheme={setTheme}/>} />
         </Routes> 
     )
 }

@@ -2,14 +2,15 @@ import React, { useState, useEffect} from 'react';
 import { setTitle } from '../../assets/js/script';
 import { useNavigate } from "react-router-dom";
 import { getUserFromToken, getHomePostsFromToken } from '../../axios/api';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Cookies from 'universal-cookie';
 import Sidenav from '../partials/Sidenav';
 import Post from '../partials/Post';
 import ModalCreatePost from '../partials/ModalCreatePost';
 import ModalLoading from '../partials/ModalLoading';
 import ModalComplete from '../partials/ModalComplete';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import iconlogo from '../../assets/img/circle-logo.png';
 
 const Home = (props) => {
     setTitle('Home');
@@ -40,8 +41,12 @@ const Home = (props) => {
     }
 
     useEffect( () =>{
-        authentication(token);
-        loadPosts(token);
+        if(token){
+            authentication(token);
+            loadPosts(token);
+        }else{
+            navigate('/user/login');
+        }
     }, []);
     
     return (
@@ -83,7 +88,7 @@ const Home = (props) => {
                                 pic={data.pic}
                                 caption={data.caption}
                                 attachment={data.attachment}
-                                date={data.date} 
+                                date={data.date}
                                 update={data.update}
                                 owner={data.owner}
                                 isLiked={data.isLiked}
@@ -108,13 +113,20 @@ const Home = (props) => {
                             </div>
                         </div>
                         :
-                        <div>No post to show</div>
+                        <div className='d-flex flex-column'>
+                            <div className="d-flex flex-column h-100 justify-content-center align-items-center">
+                                <img className="rounded-circle border bg-white" src={iconlogo} alt="" width={100} height={100} />
+                                <div className="fs-5 mt-3">No post to show</div>
+                                <div className="fw-light">Search your friends and follow them</div>
+                                <button className="btn btn-primary btn-sm mt-3 px-3 rounded rounded-3" data-bs-toggle="modal" data-bs-target="#modalSearch">Search people</button>
+                            </div>
+                        </div>
                         }
                     </div>
                     }
                 </div>
             </div>
-            <ToastContainer draggable={false}/>
+            <ToastContainer draggable={false} autoClose={4000} theme={props.theme}/>
         </div>
     )
 }

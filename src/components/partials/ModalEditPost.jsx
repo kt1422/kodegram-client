@@ -3,6 +3,7 @@ import Cookies from 'universal-cookie';
 import { Link } from "react-router-dom";
 import { editPost } from '../../axios/api';
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
 
 const ModalEditPost = (props) => {
     let redirect = useNavigate();
@@ -17,7 +18,7 @@ const ModalEditPost = (props) => {
         if(response.data.status == "success") {
             props.setCaption(editCaption);
             props.setUpdate("just now");
-            alert("Your post has been updated");
+            toast.success("Your post has been updated.");
         } else {
             redirect('/user/login');
         }

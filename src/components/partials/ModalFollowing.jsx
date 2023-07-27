@@ -78,7 +78,7 @@ const ModalFollowing = (props) => {
                                     </div>
                             ))
                             :
-                            <div>No following yet</div>
+                            <div className='text-center'>No following yet</div>
                             }
                         </div>
                     </div>

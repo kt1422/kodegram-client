@@ -79,7 +79,7 @@ const Settings = (props) => {
         }else{
             setUpload(userpic);
         }
-        setTriggerSave(triggerSave+1);
+        // setTriggerSave(triggerSave+1);
     }
 
     const handleSave = async () => {
@@ -100,10 +100,10 @@ const Settings = (props) => {
     }
 
     useEffect( () =>{
-        if(triggerSave>0){
+        if(upload){
             handleSave();
         }
-    }, [triggerSave]);
+    }, [upload]);
 
     const handleChangePass = async (e) => {
         e.preventDefault();
@@ -222,7 +222,7 @@ const Settings = (props) => {
                     </div>
                 </div>
             </div>
-            <ToastContainer draggable={false}/>
+            <ToastContainer draggable={false} autoClose={4000} theme={props.theme}/>
         </div>
     )
 }

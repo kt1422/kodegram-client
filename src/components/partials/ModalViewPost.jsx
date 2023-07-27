@@ -91,9 +91,6 @@ const ModalViewPost = (props) => {
     const deletePostHandle = async (post_id) =>{
         const response = await deletePost({token: token, post_id: post_id});
         if(response.data.status == "success") {
-            // const genericModalEl = document.getElementById(`viewPostModal${post_id}`);
-            // const modal = bootstrap.Modal.getInstance(genericModalEl);
-            // modal.hide();
             props.loadNumbers(token, props.paramId);
             props.loadPosts(token, props.paramId);
             toast.success("Your post has been deleted");

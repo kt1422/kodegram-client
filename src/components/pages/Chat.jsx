@@ -25,15 +25,13 @@ const Chat = (props) => {
     const token = cookies.get('userToken');
     const queryParameters = new URLSearchParams(window.location.search);
     const paramId = queryParameters.get("id");
+    const isMobile = window.matchMedia("(max-width: 680px)").matches;
 
     const [likeModal, setLikeModal] = useState(0);
     const [triggerSocket, setTriggerSocket] = useState(false);
     const [triggerProfile, setTriggerProfile] = useState(false);
     const [profileChat, setProfileChat] = useState({});
 
-    const [isMobile, setIsMobile] = useState(
-        window.matchMedia("(max-width: 680px)").matches
-    );
     const [visible1, setVisible1] = useState(true);
     const [visible2, setVisible2] = useState(!isMobile);
 
@@ -115,6 +113,14 @@ const Chat = (props) => {
             changeCurrentChat("", newConvo[0]);
         }
     }
+
+    const handleBack = () => {
+        if (window.history.state && window.history.state.idx > 0) {
+            navigate(-1);
+        }else{
+            navigate('/home');
+        }
+    }
     
     useEffect( () =>{
         authentication(token);
@@ -163,13 +169,22 @@ const Chat = (props) => {
                 <div className='container-fuild p-0 m-0 d-flex h-100'>
                     <CCollapse id="collapseConvo" horizontal visible={visible1} >
                         <div className='d-flex flex-column border-end m-0 convo-con h-100'>
-                            <div className='px-3 pt-4 pb-2 d-flex justify-content-between'>
-                                <h4>{username}</h4>
-                                <button 
-                                className={`border-0 bg-transparent fs-5 p-0 ${props.theme=="dark"?"black-icon":"black-link"}`}
-                                data-bs-toggle="modal" data-bs-target="#modalChat">
-                                    <FontAwesomeIcon icon="fa-regular fa-pen-to-square"/>
-                                </button>
+                            <div className='px-3 pt-4 pb-2 d-flex justify-content-between align-items-center'>
+                                <div className='d-flex align-items-center m-0 p-0 gap-1'>
+                                    <button className={`arrow border-0 bg-transparent fs-4 p-0 pe-1 ${props.theme=="dark"?"white-icon":"black-icon"}`}
+                                    onClick={()=>handleBack()} 
+                                    aria-expanded={props.visible2} aria-controls="collapseChat">
+                                        <FontAwesomeIcon icon="fa-solid fa-angle-left" />
+                                    </button>
+                                    <h4 className='m-0 p-0'>{username}</h4>
+                                </div>
+                                <div className='d-flex align-items-center m-0 p-0'>
+                                    <button 
+                                    className={`border-0 bg-transparent fs-4 p-0 me-2 ${props.theme=="dark"?"white-icon":"black-icon"}`}
+                                    data-bs-toggle="modal" data-bs-target="#modalChat">
+                                        <FontAwesomeIcon icon="fa-regular fa-pen-to-square"/>
+                                    </button>
+                                </div>
                             </div>
                             <div className='px-3 pb-3 fw-bold'>Messages</div>
                             <div className='style-5 overflow-auto h-100 w-100'>
@@ -243,7 +258,7 @@ const Chat = (props) => {
                 </div>
             </div>
             <ModalChat handleNewChat={handleNewChat} theme={props.theme} likeModal={likeModal} setLikeModal={setLikeModal} />
-            <ToastContainer draggable={false}/>
+            <ToastContainer draggable={false} autoClose={4000} theme={props.theme}/>
         </div>
     )
 }

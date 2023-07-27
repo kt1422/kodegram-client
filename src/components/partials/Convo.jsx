@@ -16,9 +16,7 @@ const Convo = (props) => {
     const scrollRef = useRef();
     const [messages, setMessages] = useState([]);
     const [arrivalMessage, setArrivalMessage] = useState(null);
-    const [isMobile, setIsMobile] = useState(
-        window.matchMedia("(max-width: 680px)").matches
-    );
+    const isMobile = window.matchMedia("(max-width: 680px)").matches;
 
     const handleGetMessage = async () => {
         const response = await getMessage({

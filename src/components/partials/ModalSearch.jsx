@@ -108,7 +108,7 @@ const ModalSearch = (props) => {
                                         <div className="spinner-border" role="status"></div>
                                     </div>
                                     :
-                                    <div>No post to show</div>
+                                    <div className='text-center'>No user to show</div>
                                     }
                                 </div>
                                 }

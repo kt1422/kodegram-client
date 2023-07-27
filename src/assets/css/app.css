@@ -50,10 +50,10 @@
 .black-link:hover {
     color: black;
 }
-.black-icon {
+.white-icon {
     color: white;
 }
-.black-icon:hover {
+.white-icon:hover {
     color: gray;
 }
 .white-link {
@@ -64,6 +64,12 @@
 }
 .follow-count:hover {
     text-shadow: 2px 2px 5px red;
+}
+.black-icon {
+    color: black;
+}
+.black-icon:hover {
+    color: gray;
 }
 
 
@@ -432,10 +438,8 @@
     }
 }
 
-
-/* bottom nav, adjust upper container for chat */
-@media only screen and (max-width: 480px) {
-    .chat-page {
-        height: 93vh;
+@media only screen and (min-width: 681px) {
+    .arrow {
+        display: none;
     }
 }

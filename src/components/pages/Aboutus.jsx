@@ -2,6 +2,8 @@ import React, { useState, useEffect} from 'react';
 import { setTitle } from '../../assets/js/script';
 import { useNavigate } from "react-router-dom";
 import { getUserFromToken } from '../../axios/api';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Cookies from 'universal-cookie';
 import Sidenav from '../partials/Sidenav';
 import ModalCreatePost from '../partials/ModalCreatePost';
@@ -72,6 +74,7 @@ const Aboutus = (props) => {
                     <p><span className='fw-bold'>Solution:</span> Kodegram provides a social media platform that focuses on creating a community of like-minded individuals who are passionate about sharing their experiences and interests with each other. By providing advanced search functionality, Kodegram allows users to easily find and connect with others who share their hobbies and interests, creating a space where authentic connections can flourish. Additionally, by prioritizing user-generated content and personalized feeds, Kodegram ensures that users are seeing content that is meaningful and relevant to them, rather than being bombarded with ads and promotional content. Overall, Kodegram's solution helps to create a more authentic and engaging social media experience for users.</p>
                 </div>
             </div>
+            <ToastContainer draggable={false} autoClose={4000} theme={props.theme}/>
         </div>
     )
 }

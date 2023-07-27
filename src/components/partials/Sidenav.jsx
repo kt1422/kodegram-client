@@ -7,6 +7,7 @@ import ModalLogout from './ModalLogout';
 import ModalSearch from './ModalSearch';
 
 const Sidenav = (props) => {
+    const isMobile = window.matchMedia("(max-width: 680px)").matches;
     let chatPage = "";
     try {
         chatPage = props.page;
@@ -46,56 +47,56 @@ const Sidenav = (props) => {
                 <nav>
                     <ul className="nav-list ps-0">
                         <li className="nav-item">
-                            <Link to={"/home"} className="nav-link">
+                            <Link to={"/home"} className={`nav-link ${isMobile?"":"sidenav-hover"}`}>
                             <FontAwesomeIcon icon="fa-solid fa-home" className="nav-icon" />
                             <span className="nav-label">Home</span>
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to={"/user/chat"} className="nav-link">
+                            <Link to={"/user/chat"} className={`nav-link ${isMobile?"":"sidenav-hover"}`}>
                             <FontAwesomeIcon icon="fa-solid fa-message" className="nav-icon" />
                             <span className="nav-label">Messages</span>
                             </Link>
                         </li>
-                        <li className="nav-item hide-icon">
-                            <Link className="nav-link">
+                        {/* <li className="nav-item hide-icon">
+                            <Link className={`nav-link ${isMobile?"":"sidenav-hover"}`}>
                             <FontAwesomeIcon icon="fa-solid fa-heart" className="nav-icon" />
                             <span className="nav-label">Notifications</span>
                             </Link>
-                        </li>
+                        </li> */}
                         <li className="nav-item">
-                            <Link data-bs-toggle="modal" data-bs-target="#createPostModal" className="nav-link">
+                            <Link data-bs-toggle="modal" data-bs-target="#createPostModal" className={`nav-link ${isMobile?"":"sidenav-hover"}`}>
                             <FontAwesomeIcon icon="fa-solid fa-plus-square" className="nav-icon" />
                             <span className="nav-label">Create</span>
                             </Link>
                         </li>
                         <li className="nav-item hide-icon">
-                            <Link to={`/user/profile?id=${props.user_id}`} className="nav-link" reloadDocument>
+                            <Link to={`/user/profile?id=${props.user_id}`} className={`nav-link ${isMobile?"":"sidenav-hover"}`} reloadDocument>
                             <FontAwesomeIcon icon="fa-solid fa-user-circle" className="nav-icon" />
                             <span className="nav-label">Profile</span>
                             </Link>
                         </li>
                         <li className="nav-item hide-icon">
-                            <Link to={"/user/aboutus"} className="nav-link">
+                            <Link to={"/user/aboutus"} className={`nav-link ${isMobile?"":"sidenav-hover"}`}>
                             <FontAwesomeIcon icon="fa-solid fa-question-circle" className="nav-icon" />
                             <span className="nav-label">About Us</span>
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link data-bs-toggle="modal" data-bs-target="#modalSearch" className="nav-link">
+                            <Link data-bs-toggle="modal" data-bs-target="#modalSearch" className={`nav-link ${isMobile?"":"sidenav-hover"}`}>
                             <FontAwesomeIcon icon="fa-solid fa-search" className="nav-icon" />
                             <span className="nav-label">Search</span>
                             </Link>
                         </li>
                         <li className="nav-item hide-icon">
-                            <button className={`nav-link border-0 bg-transparent`} onClick={handleThemeToggle}>
+                            <button className={`nav-link border-0 bg-transparent ${isMobile?"":"sidenav-hover"}`} onClick={handleThemeToggle}>
                             <FontAwesomeIcon icon={props.theme=="dark" ? "fa-solid fa-moon" : "fa-solid fa-sun"} className="nav-icon" />
                             <span className="nav-label">Switch Theme</span>
                             </button>
                         </li>
                         <li className="nav-item dropdown dropup pfp">
-                            <a className="nav-link dropdown-toggle pff" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img className="rounded-circle border border-dark bg-white me-2" src={props.pic} alt="" style={{width: 25, height: 25}}/>
+                            <a className={`nav-link dropdown-toggle ${isMobile?"":"sidenav-hover"}`} href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img className="rounded-circle border border-dark bg-white nav-icon" src={props.pic} alt="" style={{width: 25, height: 25}}/>
                                 <span className="nav-label"> {props.username} </span>
                             </a>
                             <ul className={`dropdown-menu ${props.theme=="dark" ? "darker" : "lighter"}`}>

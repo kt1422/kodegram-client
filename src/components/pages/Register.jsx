@@ -69,12 +69,12 @@ const Register = () => {
     
     return (
         <div>
-            <div style={{height: "100vh"}} className="container-fluid d-flex flex-column flex-sm-row align-items-center justify-content-center gap-5">
-                <div className='col-3'>
-                    <img className='img-fluid float-end' src={logo} alt="" style={{maxHeight: 400}} />
+            <div style={{height: "100vh"}} className="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-center">
+                <div className='mx-4 d-none d-md-block'>
+                    <img className='img-fluid float-end start-logo' src={logo} alt="" />
                 </div>
-                <div className="col-10 col-sm-5 col-md-4 bg-dark rounded rounded-4 d-flex justify-content-center flex-column px-4 text-light" style={{height: 600}}>
-                    <h1 className="align-self-center mb-3">Register</h1>
+                <div className="border login rounded rounded-4 d-flex justify-content-center flex-column px-3 py-3 mx-4">
+                    <div className="align-self-center mb-2 billabong title">Kodegram</div>
                     <form action="" onSubmit={(e)=> handleSubmit(e)}>
                         <div className="mb-3">
                             <label htmlFor="fname" className="form-label">Name</label>
@@ -109,7 +109,7 @@ const Register = () => {
                     </form>
                 </div>
             </div>
-            <ToastContainer draggable={false}/>
+            <ToastContainer draggable={false} autoClose={4000} />
         </div>
     )
 }

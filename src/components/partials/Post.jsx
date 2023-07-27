@@ -10,13 +10,13 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Post = (props) => {
-
     let redirect = useNavigate();
     const cookies = new Cookies();
     const token = cookies.get('userToken');
 
     const [caption, setCaption] = useState(props.caption);
     const [update, setUpdate] = useState(props.update);
+    const isMobile = window.matchMedia("(max-width: 680px)").matches;
 
     const hidePost = (element) =>{
         // document.getElementById(element).remove();
@@ -26,8 +26,13 @@ const Post = (props) => {
     const deletePostHandle = async (post_id) =>{
         const response = await deletePost({token: token, post_id: post_id});
         if(response.data.status == "success") {
-            // document.getElementById(`post${post_id}`).remove();
             document.getElementById(`post${post_id}`).style.display = "none";
+            try {
+                props.loadNumbers(token, props.paramId);
+                props.loadPosts(token, props.paramId);
+            } catch (error) {
+                //nothing
+            }
             toast.success("Your post has been deleted");
         } else {
             redirect('/user/login');
@@ -206,24 +211,24 @@ const Post = (props) => {
                     <div className='d-flex gap-3'>
                         {
                             (heart=="Liked")?
-                            <button className={`name-link border-0 bg-transparent fs-4 p-0 ${props.theme=="dark" ? "dark" : "red"}`} onClick={() => likeHandle(props.post_id, false)} >
+                            <button className={`${isMobile?"":"name-link"} border-0 bg-transparent fs-4 p-0 ${props.theme=="dark" ? "dark" : "red"}`} onClick={() => likeHandle(props.post_id, false)} >
                                 <FontAwesomeIcon icon="fa-solid fa-heart"/>
                             </button>
                             :
-                            <button className={`name-link border-0 bg-transparent fs-4 p-0 ${props.theme}`} onClick={()=>likeHandle(props.post_id, true)} >
+                            <button className={`${isMobile?"":"name-link"} border-0 bg-transparent fs-4 p-0 ${props.theme}`} onClick={()=>likeHandle(props.post_id, true)} >
                                 <FontAwesomeIcon icon="fa-regular fa-heart"/>
                             </button>
                         }
-                        <button className={`name-link border-0 bg-transparent fs-4 p-0 ${props.theme}`} data-bs-toggle="modal" 
+                        <button className={`${isMobile?"":"name-link"} border-0 bg-transparent fs-4 p-0 ${props.theme}`} data-bs-toggle="modal" 
                             data-bs-target={`#viewPostModalHome${props.post_id}`}>
                             <FontAwesomeIcon icon="fa-regular fa-comment"/>
                         </button>
-                        <button className={`name-link border-0 bg-transparent fs-4 p-0 ${props.theme}`}>
+                        <button className={`${isMobile?"":"name-link"} border-0 bg-transparent fs-4 p-0 ${props.theme}`}>
                             <FontAwesomeIcon icon="fa-regular fa-paper-plane"/>
                         </button>
                     </div>
                     <div>
-                        <button className={`name-link border-0 bg-transparent fs-4 p-0 ${props.theme}`}>
+                        <button className={`${isMobile?"":"name-link"} border-0 bg-transparent fs-4 p-0 ${props.theme}`}>
                             <FontAwesomeIcon icon="fa-regular fa-bookmark"/>
                         </button>
                     </div>
@@ -239,6 +244,9 @@ const Post = (props) => {
                 heart={heart} 
                 likeModal={props.likeModal} 
                 setLikeModal={props.setLikeModal}
+                loadNumbers={props.loadNumbers}
+                loadProfile={props.loadProfile}
+                paramId={props.paramId}
                 theme={props.theme}
                 />
                 {

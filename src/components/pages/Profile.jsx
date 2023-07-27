@@ -31,9 +31,7 @@ export default function Profile(props) {
     const paramId = queryParameters.get("id");
     const [likeModal, setLikeModal] = useState(0);
     
-    const [isMobile, setIsMobile] = useState(
-        window.matchMedia("(max-width: 680px)").matches
-    );
+    const isMobile = window.matchMedia("(max-width: 680px)").matches;
     const [visible1, setVisible1] = useState(true);
     const [visible2, setVisible2] = useState(!isMobile);
 
@@ -119,7 +117,6 @@ export default function Profile(props) {
         setTimeout(() => {
             const element = document.getElementById(post_id);
             if (element) {
-                console.log(post_id);
                 element.scrollIntoView({
                     behavior: "smooth",
                     block: "end",
@@ -298,8 +295,12 @@ export default function Profile(props) {
                                     </div>
                                     }
                                     </div>
-                                    <div className="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabIndex="0">Coming soon</div>
-                                    <div className="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabIndex="0">Coming soon</div>
+                                    <div className="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabIndex="0">
+                                        <div className='text-center'>Coming soon</div>
+                                    </div>
+                                    <div className="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabIndex="0">
+                                        <div className='text-center'>Coming soon</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -342,6 +343,10 @@ export default function Profile(props) {
                                         likeModal={likeModal}
                                         setLikeModal={setLikeModal} 
                                         theme={props.theme}
+                                        loadNumbers={loadNumbers}
+                                        loadProfile={loadProfile}
+                                        paramId={paramId}
+                                        loadPosts={loadPosts}
                                     />
                                 ))
                                 }
@@ -385,7 +390,7 @@ export default function Profile(props) {
                     </div>
                 </div>
             </div>
-            <ToastContainer draggable={false}/>
+            <ToastContainer draggable={false} autoClose={4000} theme={props.theme}/>
         </div>
     )
 }
