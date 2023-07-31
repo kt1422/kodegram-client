@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { setTitle, showPassword  } from '../../assets/js/script';
+import { setTitle } from '../../assets/js/script';
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from '../../axios/api';
@@ -11,10 +11,16 @@ import 'react-toastify/dist/ReactToastify.css';
 const Login = (props) => {
     setTitle("Login");
     let navigate = useNavigate();
+    const cookies = new Cookies();
+    const token = cookies.get('userToken');
     const queryParameters = new URLSearchParams(window.location.search);
     const result = queryParameters.get("result");
 
     useEffect( () =>{
+        if(token){
+            navigate("/home");
+        }
+
         if(result=="success"){
             toast.success("You have successfuly verified your email!");
         }else if(result=="invalid-code"){
@@ -72,20 +78,20 @@ const Login = (props) => {
                         <label htmlFor="password" className="form-label">Password</label>
                         <input type="password" className="form-control" name="password" id="password" onChange={(e)=> onValueChange(e)} value={password} required/>
                     </div>
-                    <div className="mb-5 form-check">
-                        <input type="checkbox" className="form-check-input" id="checkBoxPass" onClick={()=> showPassword()}/>
-                        <label className="form-check-label" htmlFor="checkBoxPass">Show Password</label>
-                    </div>
                     <div className="mb-3">
+                        <Link to={"/user/forgot"} className='nav-link text-primary' style={{fontSize:14}}>Forgot password?</Link>
+                    </div>
+                    <div className="d-flex justify-content-center mb-4">
+                        <button type="submit" className="btn btn-primary rounded-pill" style={{width: 150}}>Login</button>
+                    </div>
+                    <div className="mb-1">
                         <p className="form-label">Dont have an account yet?&nbsp;
                             <Link to={"/user/register"}>
                             Sign Up 
                             </Link>
                         </p>
                     </div>
-                    <div className="d-flex justify-content-center mb-1">
-                        <button type="submit" className="btn btn-primary rounded-pill" style={{width: 150}}>Login</button>
-                    </div>
+                    
                 </form>
             </div>
             <ToastContainer draggable={false} autoClose={4000} />

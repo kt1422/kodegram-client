@@ -41,12 +41,8 @@ const Home = (props) => {
     }
 
     useEffect( () =>{
-        if(token){
-            authentication(token);
-            loadPosts(token);
-        }else{
-            navigate('/user/login');
-        }
+        authentication(token);
+        loadPosts(token);
     }, []);
     
     return (

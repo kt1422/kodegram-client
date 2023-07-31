@@ -123,8 +123,12 @@ const Chat = (props) => {
     }
     
     useEffect( () =>{
-        authentication(token);
-        getUserConvos(token);
+        if(token){
+            authentication(token);
+            getUserConvos(token);
+        }else{
+            navigate('/user/login');
+        }
     }, []);
 
     useEffect(() => {

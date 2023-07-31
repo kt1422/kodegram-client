@@ -14,6 +14,7 @@ const Convo = (props) => {
     const cookies = new Cookies();
     const token = cookies.get('userToken');
     const scrollRef = useRef();
+    const [isSending, setIsSending] = useState(false);
     const [messages, setMessages] = useState([]);
     const [arrivalMessage, setArrivalMessage] = useState(null);
     const isMobile = window.matchMedia("(max-width: 680px)").matches;
@@ -44,8 +45,8 @@ const Convo = (props) => {
         e.target.style.height = `${Math.min(e.target.scrollHeight, 100)}px`;
     }
 
-    const handleSend = async (e) => {
-        e.preventDefault();
+    const handleSend = async () => {
+        setIsSending(true);
         if(inputMsg.length > 0){
             const response = await sendMessage({
                 token: token,
@@ -66,8 +67,9 @@ const Convo = (props) => {
                     date: response.data.newChat.date,
                     convo: response.data.newChat.convo
                 });
-
+                
                 setInputMsg("");
+                setIsSending(false);
                 if(props.currentChat.convo==""){
                     props.setNewChatUser([]);
                 }
@@ -182,10 +184,6 @@ const Convo = (props) => {
                     :
                     <></>
                     }
-                    {/* <Link to={`/user/profile?id=${props.currentChat.user_id}`} className="nav-link d-flex px-3 pb-2" style={{paddingTop: "14px"}}>
-                        <img className="rounded-circle border border-dark bg-white me-3" src={props.currentChat.pic} alt="" style={{width: 50, height: 50}}/>
-                        <div className='name-link d-flex align-items-center'>{props.currentChat.fname}</div>
-                    </Link> */}
                     <div className="w-100 d-flex justify-content-between align-items-center pb-2 px-3" style={{paddingTop: "14px"}}>
                         <div className="d-flex">
                             <img className="rounded-circle border border-dark bg-white me-2" src={props.currentChat.pic} alt="" style={{width: 50, height: 50}}/>
@@ -232,8 +230,8 @@ const Convo = (props) => {
                     }
                     </div>
                 </div>
-                <div className="p-3">
-                    <form className='d-flex align-items-start border rounded-4' onSubmit={(e) => handleSend(e)}>
+                <div className="p-3 sticky-bottom">
+                    <div className='d-flex align-items-start border rounded-4'>
                         <div className="d-flex rounded w-100">
                             <textarea
                                 className={`style-5 border-0 comment-box col rounded-4 p-3 ${props.theme=="dark"?"darker":"lighter"}`} 
@@ -247,7 +245,11 @@ const Convo = (props) => {
                         (inputMsg!=="")?
                         <div className="d-flex align-self-stretch border-start">
                             <div className="d-flex align-items-center">
-                                <button type="submit" className={`border-0 bg-transparent fw-semibold col-auto px-3 ${props.theme=="dark"?"text-white":""}`}>
+                                <button
+                                type="submit" 
+                                className={`border-0 bg-transparent fw-semibold col-auto px-3 ${props.theme=="dark"?"text-white":""}`}
+                                disabled={isSending}
+                                onClick={()=>handleSend()}>
                                     Send
                                 </button>
                             </div>
@@ -255,7 +257,7 @@ const Convo = (props) => {
                         :
                         <div></div>
                         }
-                    </form>
+                    </div>
                 </div>
             </div>
             }

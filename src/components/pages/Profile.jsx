@@ -29,6 +29,7 @@ export default function Profile(props) {
     const token = cookies.get('userToken');
     const queryParameters = new URLSearchParams(window.location.search);
     const paramId = queryParameters.get("id");
+    const [isBtnDisabled, setIsBtnDisabled] = useState(false);
     const [likeModal, setLikeModal] = useState(0);
     
     const isMobile = window.matchMedia("(max-width: 680px)").matches;
@@ -36,10 +37,14 @@ export default function Profile(props) {
     const [visible2, setVisible2] = useState(!isMobile);
 
     useEffect( () =>{
-        loadNavnVerify(token);
-        loadProfile(token, paramId);
-        loadNumbers(token, paramId);
-        loadPosts(token, paramId);
+        if(token){
+            loadNavnVerify(token);
+            loadProfile(token, paramId);
+            loadNumbers(token, paramId);
+            loadPosts(token, paramId);
+        }else{
+            navigate('/user/login');
+        }
     }, []);
 
     const [user, setUser] = useState({});
@@ -55,7 +60,9 @@ export default function Profile(props) {
 
     const [follow, setFollow] = useState("Follow");
     const followHandle = async (isFollowing) =>{
+        setIsBtnDisabled(true);
         const response = await followUser({token: token, id: paramId, isFollowing: isFollowing});
+        event.currentTarget.disabled = false;
         if(response.data.status == "success") {
             await loadNumbers(token, paramId);
             setLikeModal(likeModal+1);
@@ -67,7 +74,7 @@ export default function Profile(props) {
         } else {
             navigate('/user/login');
         }
-        
+        setIsBtnDisabled(false);
     }
 
     const [profile, setProfile] = useState({});
@@ -189,7 +196,7 @@ export default function Profile(props) {
                                         <div className='d-flex align-items-center gap-3'>
                                             {
                                             (follow=="Follow")?
-                                            <button className="btn btn-primary" onClick={()=>followHandle(true)} >&nbsp;Follow&nbsp;</button>
+                                            <button className="btn btn-primary" onClick={(event)=>followHandle(true)} disabled={isBtnDisabled}>&nbsp;Follow&nbsp;</button>
                                             :
                                             <button className="btn btn-info" data-bs-toggle="modal" data-bs-target="#unfollowModal">Following</button>
                                             }
@@ -384,7 +391,7 @@ export default function Profile(props) {
                             </div>
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                <button type="button" className="btn btn-primary" onClick={()=>followHandle(false)} data-bs-dismiss="modal">Confirm</button>
+                                <button type="button" className="btn btn-primary" onClick={(event)=>followHandle(false)} data-bs-dismiss="modal">Confirm</button>
                             </div>
                         </div>
                     </div>

@@ -42,6 +42,14 @@ export const loginUser = async(data) => {
     }
 }
 
+export const forgotPass = async(data) => {
+    try {
+        return await axios.post(url+"/user/forgot", data);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 export const getUserFromToken = async(data) => {
     try {
         return await axios.post(url+"/user/home", data);

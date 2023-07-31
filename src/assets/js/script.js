@@ -12,8 +12,3 @@ export const showPassword = () => {
 export const setTitle = (newTitle) => {
     return (document.title = newTitle);
 }
-
-// if (window.matchMedia('screen and (max-width: 680px)').matches) {
-//     const myCollapsible = new bootstrap.Collapse("#collapseConvo");
-//     myCollapsible.hide();
-// }

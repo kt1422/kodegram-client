@@ -30,7 +30,11 @@ const Aboutus = (props) => {
     }
 
     useEffect( () =>{
-        authentication(token);
+        if(token){
+            authentication(token);
+        }else{
+            navigate('/user/login');
+        }
     }, []);
 
     return (

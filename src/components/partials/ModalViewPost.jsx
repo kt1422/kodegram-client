@@ -21,7 +21,9 @@ const ModalViewPost = (props) => {
     const defaultWordLike = (props.numLikes>1)?"likes":"like";
     const [wordLike, setWordLike] = useState(defaultWordLike);
     const [heart, setHeart] = useState(props.isLiked);
+    const [isLiking, setIsLiking] = useState(false);
     const likeHandle = async (postId, isLiked) =>{
+        setIsLiking(true);
         const response = await likePost({token: token, post_id: postId, isLiked: isLiked});
         if(response.data.status == "success") {
             if(isLiked){
@@ -33,6 +35,7 @@ const ModalViewPost = (props) => {
                 setNumLikes(numLikes-1);
                 (numLikes>2)?setWordLike("likes"):setWordLike("like");
             }
+            setIsLiking(false);
         } else {
             navigate('/user/login');
         }
@@ -46,16 +49,19 @@ const ModalViewPost = (props) => {
         e.target.style.height = `${Math.min(e.target.scrollHeight, 100)}px`;
     }
 
+    const [isSending, setIsSending] = useState(false);
     const [numComments, setNumComments] = useState(props.numComments);
     const defaultWordComment = (props.numComments>1)?"comments":"comment";
     const [wordComment, setWordComment] = useState(defaultWordComment);
     const [commentBox, setCommentBox] = useState([]);
     const commentHandle = async () =>{
+        setIsSending(true);
         const response = await addComment({token: token, post_id: props.post_id, comment_to: "", comment: comment});
         if(response.data.status == "success") {
             const addedComment = response.data.commentAdded;
             const user = response.data.user;
             setComment("");
+            setIsSending(false);
             setNumComments(numComments+1);
             setCommentBox(oldArray => [...oldArray, {
                 comment_id: addedComment._id,
@@ -193,11 +199,17 @@ const ModalViewPost = (props) => {
                                     <div className='d-flex gap-3'>
                                         {
                                             (heart=="Liked")?
-                                            <button className={`name-link border-0 bg-transparent fs-4 p-0 ${props.theme=="dark" ? "dark" : "text-danger"}`} onClick={()=>likeHandle(props.post_id, false)} >
+                                            <button 
+                                            className={`name-link border-0 bg-transparent fs-4 p-0 ${props.theme=="dark" ? "dark" : "text-danger"}`} 
+                                            onClick={()=>likeHandle(props.post_id, false)} 
+                                            disabled={isLiking}>
                                                 <FontAwesomeIcon icon="fa-solid fa-heart"/>
                                             </button>
                                             :
-                                            <button className={`name-link border-0 bg-transparent fs-4 p-0 ${props.theme}`} onClick={()=>likeHandle(props.post_id, true)} >
+                                            <button 
+                                            className={`name-link border-0 bg-transparent fs-4 p-0 ${props.theme}`} 
+                                            onClick={()=>likeHandle(props.post_id, true)} 
+                                            disabled={isLiking}>
                                                 <FontAwesomeIcon icon="fa-regular fa-heart"/>
                                             </button>
                                         }
@@ -233,7 +245,10 @@ const ModalViewPost = (props) => {
                                     {
                                         (comment!=="")?
                                         <div className='d-flex align-items-center h-100'>
-                                            <button className='border-0 bg-transparent text-primary-emphasis fw-semibold col-auto' onClick={()=>commentHandle()}>
+                                            <button 
+                                            className='border-0 bg-transparent text-primary-emphasis fw-semibold col-auto' 
+                                            onClick={()=>commentHandle()}
+                                            disabled={isSending}>
                                                 Post
                                             </button>
                                         </div>

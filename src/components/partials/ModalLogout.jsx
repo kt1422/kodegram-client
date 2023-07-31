@@ -1,14 +1,31 @@
 import React from 'react'
-import { useNavigate } from "react-router-dom";
 import Cookies from 'universal-cookie';
+import { useNavigate } from "react-router-dom";
 
 const ModalLogout = (props) => {
-    let navigate = useNavigate();
     const cookies = new Cookies();
+    let navigate = useNavigate();
     
     const logout =()=>{
-        cookies.remove('userToken');
-        navigate('/user/login');
+        cookies.set('userToken', '', { path: '/' });
+        const delete1 = cookies.get('userToken');
+        if(delete1){
+            cookies.remove('userToken');
+        }
+
+        const delete2 = cookies.get('userToken');
+        if(delete2){
+            cookies.set('userToken', {maxAge: -1});
+        }
+
+        const delete3 = cookies.get('userToken');
+        if(delete3){
+            cookies.set('userToken', {expires: Date.now()});
+        }
+
+        setTimeout(() => {
+            navigate('/user/login');
+        }, 1000);
     }
 
     return (

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { setTitle } from '../../assets/js/script';
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -6,10 +6,19 @@ import { createNewUser } from '../../axios/api';
 import logo from '../../assets/img/logo.png';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Cookies from 'universal-cookie';
 
 const Register = () => {
     setTitle('Register');
     let navigate = useNavigate();
+    const cookies = new Cookies();
+    const token = cookies.get('userToken');
+
+    useEffect( () =>{
+        if(token){
+            navigate('/home');
+        }
+    }, []);
 
     const defaultUserInput = {
         fname: "",

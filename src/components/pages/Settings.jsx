@@ -55,7 +55,11 @@ const Settings = (props) => {
     }
 
     useEffect( () =>{
-        loadNavnVerify(token);
+        if(token){
+            loadNavnVerify(token);
+        }else{
+            navigate('/user/login');
+        }
     }, []);
 
     const handlePic = (file) =>{
