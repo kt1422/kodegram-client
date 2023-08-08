@@ -171,7 +171,7 @@ const Convo = (props) => {
             </div>
             :
             <div className='d-flex flex-column h-100'>
-                <div className="border-bottom d-flex">
+                <div className="border-bottom d-flex sticky-top">
                     {
                     (props.isMobile)?
                     <div className="d-flex align-items-center justify-content-center ps-3 pt-2">
@@ -232,9 +232,9 @@ const Convo = (props) => {
                 </div>
                 <div className="p-3 sticky-bottom">
                     <div className='d-flex align-items-start border rounded-4'>
-                        <div className="d-flex rounded w-100">
+                        <div className="d-flex col m-0 p-0 rounded-4">
                             <textarea
-                                className={`style-5 border-0 comment-box col rounded-4 p-3 ${props.theme=="dark"?"darker":"lighter"}`} 
+                                className={`style-5 rounded-4 border-0 comment-box w-100 p-3 ${props.theme=="dark"?"darker":"lighter"}`} 
                                 rows={1} id='message' name='message' 
                                 placeholder='Send a message...' 
                                 value={inputMsg} style={{resize: "none"}} 
@@ -243,16 +243,14 @@ const Convo = (props) => {
                         </div>
                         {
                         (inputMsg!=="")?
-                        <div className="d-flex align-self-stretch border-start">
-                            <div className="d-flex align-items-center">
-                                <button
-                                type="submit" 
-                                className={`border-0 bg-transparent fw-semibold col-auto px-3 ${props.theme=="dark"?"text-white":""}`}
-                                disabled={isSending}
-                                onClick={()=>handleSend()}>
-                                    Send
-                                </button>
-                            </div>
+                        <div className="d-flex align-self-stretch border-start col-auto">
+                            <button
+                            type="submit" 
+                            className={`border-0 bg-transparent text-primary-emphasis fw-semibold px-3`}
+                            disabled={isSending}
+                            onClick={()=>handleSend()}>
+                                Send
+                            </button>
                         </div>
                         :
                         <div></div>

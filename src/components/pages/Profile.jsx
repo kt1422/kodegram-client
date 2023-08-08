@@ -47,7 +47,11 @@ export default function Profile(props) {
         }
     }, []);
 
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState({
+        user_id: "",
+        username: "Loading",
+        pic: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+    });
     const {user_id, username, pic} = user;
     const loadNavnVerify = async (getToken) =>{
         const response = await getUserFromToken({token: getToken});

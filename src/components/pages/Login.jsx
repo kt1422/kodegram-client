@@ -15,6 +15,7 @@ const Login = (props) => {
     const token = cookies.get('userToken');
     const queryParameters = new URLSearchParams(window.location.search);
     const result = queryParameters.get("result");
+    const [isDisabled, setDisabled] = useState(false);
 
     useEffect( () =>{
         if(token){
@@ -43,6 +44,7 @@ const Login = (props) => {
     
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setDisabled(true);
         const response = await loginUser(userInput);
         if(response.data.status == "success") {
             const cookies = new Cookies();
@@ -53,8 +55,10 @@ const Login = (props) => {
             }else{
                 props.setTheme(props.theme);
             }
+            setDisabled(false);
             navigate('/home');
         } else {
+            setDisabled(false);
             toast.error(response.data.message);
         }
     }
@@ -82,7 +86,7 @@ const Login = (props) => {
                         <Link to={"/user/forgot"} className='nav-link text-primary' style={{fontSize:14}}>Forgot password?</Link>
                     </div>
                     <div className="d-flex justify-content-center mb-4">
-                        <button type="submit" className="btn btn-primary rounded-pill" style={{width: 150}}>Login</button>
+                        <button type="submit" className="btn btn-primary rounded-pill" style={{width: 150}} disabled={isDisabled}>Login</button>
                     </div>
                     <div className="mb-1">
                         <p className="form-label">Dont have an account yet?&nbsp;

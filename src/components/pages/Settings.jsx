@@ -24,7 +24,11 @@ const Settings = (props) => {
     const token = cookies.get('userToken');
     const [likeModal, setLikeModal] = useState(0);
 
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState({
+        user_id: "",
+        username: "Loading",
+        pic: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+    });
     const {user_id, username, pic} = user;
 
     const [userpic, setUserpic] = useState("");
@@ -118,19 +122,47 @@ const Settings = (props) => {
         }else{
             const response = await updatePass({token: token, newPass: newPass, oldPass: oldPass});
             if(response.data.status == "success") {
-                cookies.remove('userToken');
+                cookies.set('userToken', '', { path: '/' });
+                const delete1 = cookies.get('userToken');
+                if(delete1){
+                    cookies.remove('userToken');
+                }
+
+                const delete2 = cookies.get('userToken');
+                if(delete2){
+                    cookies.set('userToken', {maxAge: -1});
+                }
+
+                const delete3 = cookies.get('userToken');
+                if(delete3){
+                    cookies.set('userToken', {expires: Date.now()});
+                }
+
                 toast.success("You have successfuly update your account! You'll be logged out in few seconds. Please re-login again.");
                 setTimeout(() => {
-                    cookies.remove('userToken');
                     navigate('/user/login');
                 }, 5000);
             }else if(response.data.status == "failed"){
                 toast.error(response.data.message);
             }else{
-                cookies.remove('userToken');
+                cookies.set('userToken', '', { path: '/' });
+                const delete1 = cookies.get('userToken');
+                if(delete1){
+                    cookies.remove('userToken');
+                }
+
+                const delete2 = cookies.get('userToken');
+                if(delete2){
+                    cookies.set('userToken', {maxAge: -1});
+                }
+
+                const delete3 = cookies.get('userToken');
+                if(delete3){
+                    cookies.set('userToken', {expires: Date.now()});
+                }
+                
                 toast.error("Sorry, your login session has expired. Please log in again.");
                 setTimeout(() => {
-                    cookies.remove('userToken');
                     navigate('/user/login');
                 }, 5000);
             }
